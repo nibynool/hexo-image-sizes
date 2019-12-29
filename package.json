@@ -1,13 +1,16 @@
 {
   "name": "@nibynool/hexo-image-sizes",
-  "version": "2.0.2",
-  "description": "Generate images of various sizes from source images.",
+  "version": "2.1.0",
+  "description": "A plugin for the Hexo static site generator to generate images of various sizes from source images.",
+  "keywords": ["hexo", "tag", "plugin", "image"],
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "author": "Travis Geis <travis@travisgeis.com> (travisgeis.com)",
+  "contributors": ["Michael Lambert (https://alphageek.com.au)"],
   "license": "MIT",
+  "homepage": "https://software.alphageek.com.au/hexo/tag-imagesizes",
   "dependencies": {
     "debug": "^2.2.0",
     "hexo-util": "^1.6.1",
