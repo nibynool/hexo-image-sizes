@@ -12,11 +12,10 @@
   "license": "MIT",
   "homepage": "https://software.alphageek.com.au/hexo/tag-imagesizes",
   "dependencies": {
-    "debug": "^2.2.0",
-    "hexo-util": "^1.6.1",
-    "js-yaml": "^3.6.1",
-    "object-assign": "^4.1.0",
-    "sharp": "^0.23.4",
+    "debug": "^4.3.1",
+    "hexo-util": "^2.5.0",
+    "js-yaml": "^4.1.0",
+    "sharp": "^0.28.1",
     "stream-to-array": "^2.3.0"
   }
 }

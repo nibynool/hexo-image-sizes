@@ -41,8 +41,22 @@ embed your images in your posts.
 
 #### Configure image profiles
 
-First, you need to set up image profiles in your sitewide `_config.yml`. Add an `image_sizes` section to your config
-file, like this:
+    # Configuration for hexo-image-sizes
+    image_sizes:
+      pattern: !!js/regexp /\.(gif|jpg|jpeg|png)$/i
+      profiles:
+        body:
+          width: 700 # height will adjust to preserve aspect ratio
+        thumbnail:
+          width: 100 # Image will be cropped to a square
+          height: 100
+        huge:
+          height: 1000
+          allowEnlargement: true
+      defaultProfile: body
+      link: true
+      linkProfile: huge
+      useAltForTitle: true
 
 ```yaml
 # Configuration for hexo-image-sizes
@@ -73,26 +87,28 @@ The `image_sizes` config object supports the following fields:
   which can contain the following properties:
   * `width`: The maximum width of images with this profile, in pixels.
   * `height`: The maximum height of images with this profile, in pixels
-  * `allowEnlargement`: A boolean, true if images smaller than the profile size should be enlarged to the maximum
-    dimensions. By default, this is false. Enlargement can cause quality degradation, so use accordingly.
+  * `autoRotate`: Rotate images based on their EXIF data. True by default.
 
-  If you want to preserve the aspect ratio of your images, just specify one of `width` and `height`, and the other will
-  adjust automatically. Images are resized using bicubic interpolation.
-* `defaultProfile`: The name of a profile specified in `profiles` that should be the default when an embedded image tag
-  doesn't specify a profile (see below). the default when an embedded image tag doesn't specify a profile (see below).
-* `link`: True if the image should be wrapped in a link to its source file. This property can also be specified in the
-  embed tag, in which case the setting in the embed tag will take precedence.
-* `linkProfile`: The profile of the image to which to link. If `linkProfile` is omitted, the link will go to the
-  original image. This property can also be specified in the embed tag, in which case the setting in the embed tag will
-  take precedence.
-* `useAltForTitle`: Set to true to use image `alt` attributes as their `title` as well.
+  If you want to preserve the aspect ratio of your images, just specify one of
+  `width` and `height`, and the other will adjust automatically. Images are
+  resized using bicubic interpolation.
+* `defaultProfile`: The name of a profile specified in `profiles` that should be
+  the default when an embedded image tag doesn't specify a profile (see below).
+  the default when an embedded image tag doesn't specify a profile (see below).
+* `link`: True if the image should be wrapped in a link to its source file.
+This property can also be specified in the embed tag, in which case the setting
+in the embed tag will take precedence.
+* `linkProfile`: The profile of the image to which to link. If `linkProfile` is omitted, the link will go to the original image.
+This property can also be specified in the embed tag, in which case the setting
+in the embed tag will take precedence.
+* `useAltForTitle`: Set to true to use image `alt` attributes as their `title`
+  as well.
 
 #### Embed images (adjusted for additional features)
 
 To use hexo-tag-image-sizes, you need to alter the way you embed images in Markdown. This package provides support for
 the `imsize` tag, which you place in your posts' Markdown like this:
 
-```markdown
     {% imsize %}
     src: /uploads/2017/01/05/5510-repair.jpg
     alt: Dell Precision 5510 repair
@@ -100,12 +116,10 @@ the `imsize` tag, which you place in your posts' Markdown like this:
     profile: thumbnail
     link: true
     linkProfile: huge
-    style: "float:right;"
     {% endimsize %}
-```
 
-The body of the `imsize` tag is a [YAML](http://yaml.org/start.html) document. It supports several keys (others are
-simply ignored):
+The body of the `imsize` tag is a [YAML](http://yaml.org/start.html) document.
+It supports three keys (others are simply ignored):
 
 * `src`: The source path of the image you want to include. This is the same path you would use with regular Markdown
   images in Hexo, and it depends on how you've configured Hexo to treat paths for your site.
